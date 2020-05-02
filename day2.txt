@@ -1,0 +1,28 @@
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3317/
+
+
+class Solution {
+public:
+    int numJewelsInStones(string J, string S) {
+        int c[26] = {0}, s[26] = {0};
+        for(auto i : J)
+        {
+            if(int(i) < 92)
+                c[int(i) - 65]++;
+            else
+                s[int(i) - 97]++;
+        }
+        int ct = 0;
+        for(auto i : S)
+        {
+            if(int(i) < 92)
+            {
+                ct+=c[int(i) - 65];
+            }
+            else
+                ct+=s[int(i) - 97];
+        }
+        
+        return ct;
+    }
+};
