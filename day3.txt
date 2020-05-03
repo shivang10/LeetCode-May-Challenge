@@ -1,0 +1,22 @@
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3318/
+
+
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        int b[26] = {0};
+        bool ans = true;
+        for(auto i : magazine)
+            b[int(i) - 97]++;
+        
+        for(auto i : ransomNote)
+        {
+            if(b[int(i) - 97] <= 0)
+                ans = false;
+            else
+                b[int(i) - 97]--;
+        }
+        return ans;
+        
+    }
+};
