@@ -1,0 +1,14 @@
+In this, we have to flip the set bits and do that same for unset bits.
+
+There are two approach for this:
+
+1st: Write the binary representation of the number and reverse the bits i.e. make 1 to 0 and 0 to 1 and store them in the array. Then calculate the required number through the binary representation of the so formed array.
+TC: O(logN)
+SC: O(logN)
+
+2nd: We can do that using BitMasking. Form Form a number with binary representation as 1, 11, 111... and so on. The number of bits in this must be equal to the number of bits in the given number. Then we perform XOR operation with both the numbers and the resultant is the answer.
+How? 
+Suppose the given number is 11. It's binary representation is 1011.
+Now we will make a number with number of bits equal to the given number, so 1111 will be the new number.
+Performing the XOR operation, 0100 will be formed and that will be answer.
+TC: O(logN)
