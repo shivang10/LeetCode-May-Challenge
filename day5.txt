@@ -1,5 +1,13 @@
 https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3320/
 
+Expaination: The first non-repeating character i.e. the character whose frequency is only 1 in the string.
+We will create HashMap for this and store the frequency of the characters.
+Then iterate over the string, and as soon as a character with frequency with 1 is found, return that index.
+Else return -1.
+
+
+Code:
+
 class Solution {
 public:
     int firstUniqChar(string s) {

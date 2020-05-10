@@ -1,4 +1,0 @@
-The first non-repeating character i.e. the character whose frequency is only 1 in the string.
-We will create HashMap for this and store the frequency of the characters.
-Then iterate over the string, and as soon as a character with frequency with 1 is found, return that index.
-Else return -1.

@@ -1,5 +1,17 @@
 https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3317/
 
+Explaination: Here, we have to find out the number of stones that we have are jewels also.
+We will solve it using Hashing
+
+First we will store or increase the count of alphabets that represent them as Jewels else it will be 0.
+
+Then we will loop through our stones and check if the stone that we have is Jewel or not. If yes, then increase the answer variable.
+Return the answer
+
+TC: O(n + m)
+SC: O(52) = constant
+
+Code:
 
 class Solution {
 public:

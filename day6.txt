@@ -1,0 +1,51 @@
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3321/
+
+
+Explaination: Here, we have to find the element that occurs more than n/2 times in the array. One solution is to create a hashMap 
+to store the count of the elements and as soon as we encounter an element with frequency greater than that, we return that element.
+TC: O(N)
+SC: O(N)
+
+Another solution is to have just two variables, one that will store the answer and another to keep the frequency count. If we 
+encounter an element and currently we have frequency variable set to 0, answer will the current number in the element by default else 
+if an element different than the answer variable is there, we will decrease the counter. How this gonna work? Suppose we have got an 
+array of 1,2,2,4,3,2,2. So now initially counter will be increased to 1 and answer variabel will be 1. Now for 2nd element, counter will 
+be 0 and in the next step answer variable will be 2, considering in the 3rd iteration. So it will go like this.
+TC: O(N)
+
+Code:
+
+1st Solution: 
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        
+        unordered_map<int, int> mp;
+        int i;
+        
+        for(int n : nums)
+        {
+            if( ++mp[n] > nums.size()/2)
+            {
+                return n;
+            }
+        }
+        return 0;
+        
+    }
+};
+
+
+2nd Solution:
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int num = 0, counter = 0;
+        for(int i = 0; i < nums.size(); i++){
+            if(counter == 0)
+                num = nums[i];
+            counter += num == nums[i] ? 1 : -1;
+        }
+        return num;
+    }
+};

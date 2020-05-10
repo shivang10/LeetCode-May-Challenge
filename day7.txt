@@ -1,0 +1,76 @@
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3322/
+
+
+Explaination: We are given two numbers and we have to check whether they are cousins, meaning they have 
+got different parent element but are at the same depth.
+So the question is sovled by using recursion.
+We will create two variables, depth and parent to store the given numbers parent and depth.
+A DFS function will be called and we will keep on checking the conditions like if root is null or not. 
+If yes, then return.
+As soon as we encounter the value equal to the passed arguement value, we will set the depth of that element and
+then call the DFS function again for the next element.
+TC: O(N)
+SC: O(N)
+
+Code:
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int depth = 0;
+    int parent = -1;
+    void dfs(TreeNode* root, int ct, int x)
+    {
+        if(root == nullptr)
+            return;
+        
+        if(root->val == x)
+        {
+            depth = ct;
+            parent = -1;
+            return;
+        }
+        if(root->left && root->left->val == x)
+        {
+            depth = ct + 1;
+            parent = root->val;
+            return;
+        }
+        else
+        if(root->right && root->right->val == x)
+        {
+            depth = ct + 1;
+            parent = root->val;
+            return;
+        }
+        dfs(root->left, ct + 1, x);
+        dfs(root->right, ct + 1, x);
+        return;
+    }
+    
+    bool isCousins(TreeNode* root, int x, int y) {
+        if(root == nullptr)
+            return false;
+        dfs(root, 0, x);
+        int xd, xp, yd, yp;
+        xd = depth;
+        xp = parent;
+        depth = 0;
+        parent = -1;
+        dfs(root, 0, y);
+        yd = depth;
+        yp = parent;
+        
+        return yd == xd && xp != yp;
+    }
+};

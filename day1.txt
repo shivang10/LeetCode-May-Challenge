@@ -1,0 +1,48 @@
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3316/
+
+Explaination: Here we have to find out the first bad version i.e. the first value in the array that has got true value.
+
+So consider the cases
+
+Case1: 0 0 0 1 1 1 1
+Here the first bad version is at index 4. So we return 4;
+
+Case2: 1 1 1 1
+The first bad version is at index 1. Return 1;
+
+Approach:
+One way is to do linear search from 1 till n and as soon as we encounter 1, return that.
+TC: O(N)
+
+We can optimize it using Binary Search, since the values are in sorted order
+Keep searching for the value equal to 1, and then return the value.
+
+TC: O(logN)
+
+Code:
+
+// The API isBadVersion is defined for you.
+// bool isBadVersion(int version);
+
+class Solution {
+public:
+    int firstBadVersion(int n) {
+        
+        int l = 1;
+        int r = n;
+        while(l < r)
+        {
+            int m = l + (r - l)/2;
+            if(isBadVersion(m))
+            {
+                r = m;
+            }
+            else
+            {
+                l = m + 1;
+            }
+        }
+        return l;
+        
+    }
+};

@@ -1,8 +1,0 @@
-We are given strings ransomNote and magazine. We have to check if we can make ransomNote string by taking alphabets from magazine string and each alphabet can be used only once.
-
-First we will make HashMap to store the frequency of each element in the string magazine.
-Then we will iterate over ransomNote string and whenever a character if found in both the strings, then decrement the count of that character from the hashmap otherwise, if a character is there in ransomNote but not in magazine, then we will return False.
-
-Otherwise return true in the end.
-TC: O(N + M)
-SC: O(26) = constant

@@ -1,0 +1,39 @@
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3324/
+
+Explaination: One simple way is to use builtin sqrt method and then check if it's square gives the same
+value or not.
+
+Another is to run a loop from 0 till n, then keep checking the condition.
+TC: O(N)
+
+The best optimised way is to use binary search. Start with two variables l = 0, and h = N and then check
+if middle number square is less than that increase l otherwise if greater, then decrease h, or if it is equal
+then return true or if every condition fails or l<=h becomes true, then return false.
+TC: O(N)
+
+
+Code:
+
+class Solution {
+public:
+    bool isPerfectSquare(int num) {
+        if(num == 0)
+            return false;
+        int l, h;
+        l = 0;
+        h = num;
+        while(l<=h)
+        {
+            long long int m = l + (h - l)/2;
+            if(m*m == num)
+                return true;
+            else
+            if(m*m > num)
+                h = m - 1;
+            else
+                l = m + 1;
+        }
+        return false;
+        
+    }
+};
