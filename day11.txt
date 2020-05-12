@@ -1,0 +1,40 @@
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3326/
+
+
+Explaination:Here, we are given an index number of the matrix and that matrix contains pixels values.
+So for the given pixel value of the corresponding index number, we have to fill all the adjacent rows 
+and columns horizontally or vertically if they are as same as the initial value of the pixel represented
+by index number with new value and keep doing that. We can do this by recursion. Make a function call,
+and then keep checking for the conditions, if index value of either the column or row is zero or greater
+than equal to total number of the columns or rows then return, or if the value of that index is already
+set to the new value then return or if it is different then also return. Otherwise, set that index value
+to new value and then recurr for four value, horizontally left(x - 1), horizontally right(x + 1), vertically
+up(y - 1), or vertically down(y + 1).
+
+
+Code:
+
+class Solution {
+public:
+    void fill(vector<vector<int>>& image, int sr, int sc, int m, int n, int newColor, int col)
+    {
+        if(sr<0 || sr >= m || sc<0 || sc>=n)
+            return;
+        if(image[sr][sc] == newColor)
+            return;
+        if(image[sr][sc] != col)
+            return;
+        
+        image[sr][sc] = newColor;
+        fill(image, sr - 1, sc, m, n, newColor, col);
+        fill(image, sr + 1, sc, m, n, newColor, col);
+        fill(image, sr, sc - 1, m, n, newColor, col);
+        fill(image, sr, sc + 1, m, n, newColor, col);
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        int col = image[sr][sc];
+        int m = image.size(), n = image[0].size();
+        fill(image, sr, sc, m, n, newColor, col);
+        return image;
+    }
+};
