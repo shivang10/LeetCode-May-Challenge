@@ -1,0 +1,46 @@
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3330/
+
+Explaination: Given an array, the maximum subarray sum is to be calculated and the array given here is
+considered to be circular. So, it can be done through Kadane's Algorithm. First get the max sum for the
+array and keep checking the count of the negative numbers. If all the numbers are negative then return 
+the smallest element else keep the max sum of the array for the 1st iteration. Also get the sum of the
+elements of the array. Then change the sign of every element in the array and then again calculate the
+max subarray sum for the subarray. Now check if sum of all the elements in the array + max subarray 
+calculated after 2nd iteration is greater than the 1st max subarray sum return that, else return the
+1st max subarray sum calculated initially.
+
+TC: O(logN)
+
+Code:
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& A) {
+        
+        if(A.size() == 0)return 0;
+        int mx1 = A[0], i, n = A.size(), cmx = A[0], s = A[0], mx2 = INT_MIN;
+        int nc = 0;
+        for(i = 0; i<n; i++)
+        {
+            mx2 = max(mx2, A[i]);
+            if(A[i] < 0)
+                nc++;
+        }
+        if(nc == n)return mx2;
+        A[0] = -A[0];
+        for(i = 1; i<n; i++)
+        {
+            cmx = max(cmx + A[i], A[i]);
+            mx1 = max(cmx, mx1);
+            s+=A[i];
+            A[i] = -A[i];
+        }
+        mx2 = A[0];
+        cmx = A[0];
+        for(i = 1; i<n; i++)
+        {
+            cmx = max(cmx + A[i], A[i]);
+            mx2 = max(cmx, mx2);
+        }
+        return mx1 > mx2 + s ? mx1 : mx2 + s;
+    }
+};
