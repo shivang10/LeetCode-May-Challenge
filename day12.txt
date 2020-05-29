@@ -1,0 +1,53 @@
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3327/
+
+Explaination: A sorted array is there and we have to look for the element that is occuring only once as all
+the other elements occur twice. We have to do this is logN time. So binay search is the most efficient way
+to solve this. We will look for elements count in the left as well as in right. Few base conditions can be
+there like if that element is in the first position or in the last position, then return there. Or we will see
+if the element and its right element is not equal as well its left element is also not equal, then return
+that element. If not so, then check if the middle value element is equal to its right element, then check if
+middle value in current iteration is even, then the value exist in the right of the element, or else the value
+is in the left part. If middle value element is equal to its left element, then check if middle value is even
+then go to left part or else to the right of the array.
+
+TC: O(logN)
+
+Code:
+
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int l, h, m, n = nums.size() - 1, ans;
+        if(n == 0)
+            return nums[0];
+        l = 0;
+        h = nums.size() - 1;
+        while(l<=h)
+        {
+            m = l + (h - l)/2;
+            if(m == 0 && nums[m + 1] != nums[m])
+            {
+                ans = nums[m];
+                break;
+            }
+            else
+            if(m == n && nums[m] != nums[m - 1])
+            {
+                ans = nums[m];
+                break;
+            }
+            else
+            if(nums[m] != nums[m + 1] && nums[m] != nums[m - 1])
+            {
+                ans = nums[m];
+                break;
+            }
+            else
+            if(nums[m] == nums[m + 1])
+                m%2 == 0 ? l = m + 1 : h = m;
+            else
+                m%2 != 0 ? l = m + 1 : h = m;
+        }
+        return ans;
+    }
+};
