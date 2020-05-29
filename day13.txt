@@ -1,0 +1,34 @@
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3328/
+
+Explaination: A number is there and we have to remove k digits to make it as small as possible. Convert the number
+into string and then get the number of digits you need to keep after removing the k digits. Then traverse through
+the number and keep checking the two conditions simultaneously: if k value is greater than 0 and the value pushed
+to the answer is greater than the current digit of the number. If so, remove the last digit pushed and decrement k.
+Insert the current digit in the answer variable. Then in the last check if there are leading 0s, if so, remove them.
+If string becomes empty, then return 0 else the answer.
+
+TC: O(logN)
+
+Code:
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        std::ios::sync_with_stdio(false);
+        std::cin.tie(nullptr);
+        std::cout.tie(nullptr);
+        string ans = "";
+        int keep = num.size() - k;
+        for (char c : num) {
+            while (k && ans.size() && ans.back() > c)
+            {
+                ans.pop_back();
+                k--;
+            }
+            ans.push_back(c);
+        }
+        ans.resize(keep);
+        while (!ans.empty() && ans[0] == '0')
+            ans.erase(ans.begin());
+        return ans.empty() ? "0" : ans;
+    }
+};
