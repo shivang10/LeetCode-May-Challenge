@@ -1,0 +1,39 @@
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3331/
+
+Explaination: We have to group all the odd positions nodes together and even positioned nodes together.
+Create two nodes for odd, even positions and traverse the LL. Keep storing odd positioned nodes in odd
+LL node and same goes for even positioned nodes. Then join both the nodes.
+
+TC: O(N)
+
+Code:
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+        if(head == nullptr)return head;
+        ListNode *odd, *even, *tmp = head;
+        odd = tmp;
+        even = tmp->next;
+        tmp = tmp->next;
+        while(odd->next && even->next)
+        {
+            odd->next = odd->next->next;
+            odd = odd->next;
+            even->next = even->next->next;
+            even = even->next;
+        }
+        odd->next = tmp;
+        return head;
+    }
+};
